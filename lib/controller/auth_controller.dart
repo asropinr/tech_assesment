@@ -15,6 +15,6 @@ class AuthController extends GetxController {
 
   postLogin() async {
     update();
-    await api.postLogin("eve.holt@reqres.in", "a");
+    await api.postLogin("eve.holt@reqres.in", "");
   }
 }
