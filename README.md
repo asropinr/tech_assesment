@@ -14,3 +14,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Penjelasan Aplikasi 
+
+Untuk akses file Apk dan Ipa berikut link google drive :
+- [Akses google](https://drive.google.com/drive/u/0/folders/1L9Z-u7es4g3qjVxRDe1JA-rSrV7AD1_z)
+
+Fitur yang ada adalah 
+- Login sesuai data yang telah diberikan
+- Menyimpan data login untuk dipakai di profile
+- Logout untuk mengakhiri session
