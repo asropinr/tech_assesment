@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:technical_assessment/constan/color.dart';
+import 'package:technical_assessment/controller/auth_controller.dart';
 import 'package:technical_assessment/presentation/home_screen.dart';
 import 'package:technical_assessment/presentation/register_screen.dart';
 
@@ -13,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  AuthController authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,7 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(HomeScreen());
+                    //Get.to(HomeScreen());
+                    authController.postLogin();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(

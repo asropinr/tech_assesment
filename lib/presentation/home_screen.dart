@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:technical_assessment/constan/color.dart';
+
 import 'package:technical_assessment/presentation/profile_saya_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -857,18 +859,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 210,
-                      child: Expanded(
-                        child: Text(
-                          "Ingin mendapat update dari kami ?",
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Ingin mendapat update",
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
                           ),
                         ),
-                      ),
+                        Text(
+                          "dari kami ?",
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                     Row(
                       children: [

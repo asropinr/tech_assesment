@@ -594,18 +594,26 @@ class _ProfileSayaScreenState extends State<ProfileSayaScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: 210,
-                  child: Expanded(
-                    child: Text(
-                      "Ingin mendapat update dari kami ?",
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Ingin mendapat update",
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
                     ),
-                  ),
+                    Text(
+                      "dari kami ?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   children: [
