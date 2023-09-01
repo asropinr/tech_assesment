@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:technical_assessment/constan/color.dart';
 import 'package:technical_assessment/controller/auth_controller.dart';
+import 'package:technical_assessment/helper/preference.dart';
 import 'package:technical_assessment/presentation/home_screen.dart';
 import 'package:technical_assessment/presentation/register_screen.dart';
 
@@ -15,6 +16,23 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   AuthController authController = Get.find<AuthController>();
+  bool isLoading = false;
+
+  postLogin() async {
+    setState(() {
+      authController.gagalCallModel?.error = null;
+      authController.suksesCallModel?.token = null;
+      isLoading = true;
+    });
+
+    await authController.postLogin(
+        authController.email.text, authController.password.text);
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextField(
+                    controller: authController.email,
                     decoration: InputDecoration(
                       focusColor: Colors.red,
                       disabledBorder: InputBorder.none,
@@ -157,6 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextField(
+                    controller: authController.password,
                     decoration: InputDecoration(
                       focusColor: Colors.red,
                       disabledBorder: InputBorder.none,
@@ -179,48 +199,98 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                InkWell(
-                  onTap: () {
-                    //Get.to(HomeScreen());
-                    authController.postLogin();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadowBlueColor.withOpacity(0.24),
-                          spreadRadius: 0,
-                          blurRadius: 24,
-                          offset:
-                              const Offset(0, 16), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.otherBlue,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(""),
-                        Text(
-                          "Login",
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                isLoading == true
+                    ? const Center(child: CircularProgressIndicator())
+                    : InkWell(
+                        onTap: () async {
+                          await postLogin();
+                          if (authController.suksesCallModel?.token != null) {
+                            await Prefence().setStatusLogin();
+                            Get.dialog(
+                              AlertDialog(
+                                title: Text(
+                                  "Sukses",
+                                  style: GoogleFonts.poppins(fontSize: 14),
+                                ),
+                                content: Text(
+                                  "Berhasil Login",
+                                  style: GoogleFonts.poppins(fontSize: 18),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: const Text("OK"),
+                                    onPressed: () {
+                                      Get.to(const HomeScreen());
+                                      setState(() {
+                                        authController.email.clear();
+                                        authController.password.clear();
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                            );
+                          } else {
+                            Get.dialog(
+                              AlertDialog(
+                                title: Text(
+                                  "Warning",
+                                  style: GoogleFonts.poppins(fontSize: 14),
+                                ),
+                                content: Text(
+                                  authController.gagalCallModel!.error!,
+                                  style: GoogleFonts.poppins(fontSize: 18),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: const Text("OK"),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    AppColors.shadowBlueColor.withOpacity(0.24),
+                                spreadRadius: 0,
+                                blurRadius: 24,
+                                offset: const Offset(
+                                    0, 16), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.otherBlue,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(""),
+                              Text(
+                                "Login",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward,
+                                size: 24,
+                                color: Colors.white,
+                              )
+                            ],
                           ),
                         ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          size: 24,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
                 const SizedBox(
                   height: 20,
                 ),

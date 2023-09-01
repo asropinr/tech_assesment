@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:technical_assessment/constan/color.dart';
 import 'package:technical_assessment/controller/auth_controller.dart';
+import 'package:technical_assessment/helper/preference.dart';
+import 'package:technical_assessment/presentation/home_screen.dart';
 import 'package:technical_assessment/presentation/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,19 +21,18 @@ class _SplashScreenState extends State<SplashScreen> {
   AuthController authController = Get.put(AuthController());
   startSplashScreen() async {
     // await authController.getToken();
-    // var status = await Prefence().getStatusLogin();
+    var status = await Prefence().getStatusLogin();
     Timer(
       const Duration(seconds: 5),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return LoginScreen();
-            // if (status == true) {
-            //   return const BottomNavBarScreen();
-            // } else {
-            //   return const LoginScreen();
-            // }
+            if (status == true) {
+              return const HomeScreen();
+            } else {
+              return const LoginScreen();
+            }
           },
         ),
       ),

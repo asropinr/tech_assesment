@@ -411,9 +411,7 @@ class _ResgiterScreenState extends State<ResgiterScreen> {
                   height: 30,
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.to(HomeScreen());
-                  },
+                  onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),

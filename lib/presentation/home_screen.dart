@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:technical_assessment/constan/color.dart';
+import 'package:technical_assessment/presentation/login_screen.dart';
 
 import 'package:technical_assessment/presentation/profile_saya_screen.dart';
 
@@ -1074,26 +1076,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 40,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 130,
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Text(
-                                "Logout",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 11,
-                                  color: Colors.white,
+                        InkWell(
+                          onTap: () async {
+                            SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            await sharedPreferences.clear();
+                            Get.offAll(const LoginScreen());
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 130,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(25),
                                 ),
-                                textAlign: TextAlign.center,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Text(
+                                  "Logout",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 11,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 80,

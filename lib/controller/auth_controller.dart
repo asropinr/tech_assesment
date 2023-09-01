@@ -13,8 +13,13 @@ class AuthController extends GetxController {
   SuksesCallModel? suksesCallModel;
   GagalCallModel? gagalCallModel;
 
-  postLogin() async {
+  postLogin(String email, String password) async {
     update();
-    await api.postLogin("eve.holt@reqres.in", "");
+    final res = await api.postLogin(email, password);
+    if (res.statusCode == 200) {
+      suksesCallModel = SuksesCallModel.fromJson(res.data!);
+    } else if (res.statusCode == 400) {
+      gagalCallModel = GagalCallModel.fromJson(res.data!);
+    }
   }
 }

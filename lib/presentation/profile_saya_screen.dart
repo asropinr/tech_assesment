@@ -16,6 +16,7 @@ class _ProfileSayaScreenState extends State<ProfileSayaScreen> {
     return Scaffold(
       backgroundColor: const Color(0XFFF5F8FA),
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
         elevation: 0,
         leading: InkWell(

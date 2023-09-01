@@ -22,5 +22,4 @@ Untuk akses file Apk dan Ipa berikut link google drive :
 
 Fitur yang ada adalah 
 - Login sesuai data yang telah diberikan
-- Menyimpan data login untuk dipakai di profile
 - Logout untuk mengakhiri session
