@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:technical_assessment/constan/color.dart';
-import 'package:technical_assessment/presentation/home_screen.dart';
 
 class ResgiterScreen extends StatefulWidget {
   const ResgiterScreen({super.key});
